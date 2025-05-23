@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
+import gsap from 'gsap';
 const canvas = document.getElementById('canvas');
 
 // Scene
@@ -37,7 +37,6 @@ bottomLight.position.set(0, -5, 5);  // below the object
 scene.add(bottomLight);
 
 
-
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -51,7 +50,7 @@ controls.dampingFactor = 0.25;
 controls.enableZoom = true;    
 controls.enablePan = true;  
 
-// Animation
+Animation
 function animate() {
     requestAnimationFrame(animate); // ⬅️ keep the loop going
   
@@ -65,6 +64,13 @@ function animate() {
   }
 
   window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+// Handle window resize
+window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
